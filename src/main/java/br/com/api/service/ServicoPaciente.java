@@ -1,6 +1,5 @@
 package br.com.api.service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -18,21 +17,7 @@ public class ServicoPaciente {
         return new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {
-                // //extrai os parametros do boddy da requisicao http  
-                // String nome = request.queryParams("nome");
-                // String cpf = request.queryParams("cpf");
-                // String sexoStr = request.queryParams("sexo");
-                // String data_nascimentoStr = request.queryParams("data_nascimento");
-
-                // //Converte o sexo para enum
-                // Paciente.Sexo sexo = Paciente.Sexo.valueOf(sexoStr);
-
-                // // Converte a string da data para um objeto Date
-                // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                // Date data_nascimento = (Date) dateFormat.parse(data_nascimentoStr);
-
-                // //executa o metodo de adicionar o contato no array list
-                // Paciente paciente = new Paciente(nome, cpf, sexo, data_nascimento);
+                
 
                 try {
 
@@ -134,26 +119,7 @@ public class ServicoPaciente {
             @Override
             public Object handle(Request request, Response response) throws Exception {
                 try {
-                    // //extrai os parametros do boddy da requisicao http  
-                    // int id = Integer.parseInt(request.params(":id"));
-                    // String nome = request.queryParams("nome");
-                    // String cpf = request.queryParams("cpf");
-                    // String sexoStr = request.queryParams("sexo");
-                    // String data_nascimentoStr = request.queryParams("data_nascimento");
-
-                    // //Converte o sexo para enum
-                    // Paciente.Sexo sexo = Paciente.Sexo.valueOf(sexoStr);
-
-                    // // Converte a string da data para um objeto Date
-                    // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    // Date data_nascimento = (Date) dateFormat.parse(data_nascimentoStr);
-    
-                    // //cria o objeto usuario na memoria
-                    // Paciente paciente = new Paciente(id, nome, cpf, sexo, data_nascimento);
-    
-                    //envia o objeto para ser inserido no banco de dados pelo DAO 
-                    //e armazena a quantidade de linhas alteradas
-                    
+   
                     // Pega o ID da URL
                     int id = Integer.parseInt(request.params(":id"));
 
