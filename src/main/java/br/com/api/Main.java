@@ -5,12 +5,18 @@ import java.sql.Connection;
 import br.com.api.config.Conexao;
 import br.com.api.dao.DAOPaciente;
 import br.com.api.routes.RotasPaciente;
+import br.com.api.routes.RotasVacina;
+import br.com.api.service.ServicoVacina;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import br.com.api.estatisticas.EstatisticasController;
 
 public class Main {
+
+    
+    private static final ServicoVacina servicoUsuario = new ServicoVacina();
+
 
     public static void main(String[] args) {
         try {
@@ -53,6 +59,10 @@ public class Main {
 
             // Registra as rotas de estatísticas
             EstatisticasController.init();
+
+
+            // Registra as rotas de Vacinas
+            RotasVacina.processarRotas(servicoUsuario);
 
             System.out.println("Servidor Spark iniciado na porta 8080.");
         } catch (Exception e) {

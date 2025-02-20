@@ -1,11 +1,13 @@
-package br.com.api;
+package br.com.api.routes;
 
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.api.RotasVacina;
-import br.com.api.Vacinas.PublicoAlvo;
+
+import br.com.api.model.Vacinas.Vacinas;
+import br.com.api.model.Vacinas.Vacinas.PublicoAlvo;
+import br.com.api.service.ServicoVacina;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -13,7 +15,7 @@ import spark.Spark;
 
 public class RotasVacina {
     
-    public static void processarRotas(ServicoUsuario servicoUsuario){
+    public static void processarRotas(ServicoVacina servicoUsuario){
         //configura o spark com quais metodos devem ser executados 
         //quando cada rota for requisitada
         Spark.get("/vacinas/consultar", consultarTodasVacinas(servicoUsuario));
@@ -45,7 +47,7 @@ public class RotasVacina {
     //     };
     // }
 
-    private static Route adicionarVacina(ServicoUsuario servicoUsuario) {
+    private static Route adicionarVacina(ServicoVacina servicoUsuario) {
         return new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {
@@ -74,7 +76,7 @@ public class RotasVacina {
     
     
     
-    private static Route consultarTodasVacinas(ServicoUsuario servicoUsuario) {
+    private static Route consultarTodasVacinas(ServicoVacina servicoUsuario) {
         return new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {
@@ -98,7 +100,7 @@ public class RotasVacina {
     }
 
     
-    private static Route consultarVacinasPorFaixa(ServicoUsuario servicoUsuario) {
+    private static Route consultarVacinasPorFaixa(ServicoVacina servicoUsuario) {
         return new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {
@@ -135,7 +137,7 @@ public class RotasVacina {
     }
     
 
-    private static Route consultarVacinasRecomendadas(ServicoUsuario servicoUsuario) {
+    private static Route consultarVacinasRecomendadas(ServicoVacina servicoUsuario) {
         return new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {
@@ -172,7 +174,7 @@ public class RotasVacina {
         }
     
 
-    private static Route consultarVacinasNaoAplicaveis(ServicoUsuario servicoUsuario) {
+    private static Route consultarVacinasNaoAplicaveis(ServicoVacina servicoUsuario) {
         return new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {

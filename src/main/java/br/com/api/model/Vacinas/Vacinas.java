@@ -1,4 +1,4 @@
-package br.com.api;
+package br.com.api.model.Vacinas;
 
 public class Vacinas {
     private String id;
