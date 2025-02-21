@@ -6,6 +6,7 @@ import java.sql.Connection;
 
 import br.com.api.config.Conexao;
 import br.com.api.dao.DAOPaciente;
+import br.com.api.estatisticas.EstatisticasController;
 // import br.com.api.dao.DAOUsuario;
 // import br.com.api.routes.Rotas;
 import br.com.api.routes.RotasPaciente;
@@ -61,6 +62,9 @@ public class Main {
             //executa o metodo para cadastrar as rotas no spark
             // Rotas.processarRotas();
             RotasPaciente.processarRotasPaciente();
+
+            // Registra as rotas de estatísticas
+            EstatisticasController.init();
         } catch (Exception e) {
             e.printStackTrace();
         }
