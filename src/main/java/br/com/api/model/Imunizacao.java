@@ -3,79 +3,79 @@ package br.com.api.model;
 import java.util.Date;
 
 public class Imunizacao {
-    private long id;
-    private long idPaciente;
-    private long idDose;
-    private Date dataAplicacao;
+    private int id;
+    private int id_paciente;
+    private int id_dose;
+    private Date data_aplicacao;
     private String fabricante;
     private String lote;
-    private String localAplicacao;
-    private String profissionalAplicador;
+    private String local_aplicacao;
+    private String profissional_aplicador;
 
     public Imunizacao(){}
 
-    public Imunizacao(Long id, Long idPaciente, Long idDose, Date dataAplicacao, 
-        String fabricante, String lote, String localAplicacao, String profissionalAplicador) {
+    public Imunizacao(int id, int id_paciente, int id_dose, Date data_aplicacao, 
+        String fabricante, String lote, String local_aplicacao, String profissional_aplicador) {
         this.id = id;
-        this.idPaciente = idPaciente;
-        this.idDose = idDose;
-        this.dataAplicacao = dataAplicacao;
+        this.id_paciente = id_paciente;
+        this.id_dose = id_dose;
+        this.data_aplicacao = data_aplicacao;
         this.fabricante = fabricante;
         this.lote = lote;
-        this.localAplicacao = localAplicacao;
-        this.profissionalAplicador = profissionalAplicador;
+        this.local_aplicacao = local_aplicacao;
+        this.profissional_aplicador = profissional_aplicador;
     }
 
-    public Imunizacao(Long idPaciente, Long idDose, Date dataAplicacao, 
-    String fabricante, String lote, String localAplicacao, String profissionalAplicador) {
-    this.idPaciente = idPaciente;
-    this.idDose = idDose;
-    this.dataAplicacao = dataAplicacao;
+    public Imunizacao(int id_paciente, int id_dose, Date data_aplicacao, 
+    String fabricante, String lote, String local_aplicacao, String profissional_aplicador) {
+    this.id_paciente = id_paciente;
+    this.id_dose = id_dose;
+    this.data_aplicacao = data_aplicacao;
     this.fabricante = fabricante;
     this.lote = lote;
-    this.localAplicacao = localAplicacao;
-    this.profissionalAplicador = profissionalAplicador;
+    this.local_aplicacao = local_aplicacao;
+    this.profissional_aplicador = profissional_aplicador;
 }
 
-    public Imunizacao(Date dataAplicacao, 
-        String fabricante, String lote, String localAplicacao, String profissionalAplicador) {
-        this.dataAplicacao = dataAplicacao;
+    public Imunizacao(Date data_aplicacao, 
+        String fabricante, String lote, String local_aplicacao, String profissional_aplicador) {
+        this.data_aplicacao = data_aplicacao;
         this.fabricante = fabricante;
         this.lote = lote;
-        this.localAplicacao = localAplicacao;
-        this.profissionalAplicador = profissionalAplicador;
+        this.local_aplicacao = local_aplicacao;
+        this.profissional_aplicador = profissional_aplicador;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getIdPaciente() {
-        return idPaciente;
+    public int getid_paciente() {
+        return id_paciente;
     }
 
-    public void setIdPaciente(long idPaciente) {
-        this.idPaciente = idPaciente;
+    public void setid_paciente(int id_paciente) {
+        this.id_paciente = id_paciente;
     }
 
-    public long getIdDose() {
-        return idDose;
+    public int getid_dose() {
+        return id_dose;
     }
 
-    public void setIdDose(long idDose) {
-        this.idDose = idDose;
+    public void setid_dose(int id_dose) {
+        this.id_dose = id_dose;
     }
 
-    public Date getDataAplicacao() {
-        return dataAplicacao;
+    public Date getdata_aplicacao() {
+        return data_aplicacao;
     }
 
-    public void setDataAplicacao(Date dataAplicacao) {
-        this.dataAplicacao = dataAplicacao;
+    public void setdata_aplicacao(Date data_aplicacao) {
+        this.data_aplicacao = data_aplicacao;
     }
 
     public String getFabricante() {
@@ -94,19 +94,19 @@ public class Imunizacao {
         this.lote = lote;
     }
 
-    public String getLocalAplicacao() {
-        return localAplicacao;
+    public String getlocal_aplicacao() {
+        return local_aplicacao;
     }
 
-    public void setLocalAplicacao(String localAplicacao) {
-        this.localAplicacao = localAplicacao;
+    public void setlocal_aplicacao(String local_aplicacao) {
+        this.local_aplicacao = local_aplicacao;
     }
 
-    public String getProfissionalAplicador() {
-        return profissionalAplicador;
+    public String getProfissional_Aplicador() {
+        return profissional_aplicador;
     }
 
-    public void setProfissionalAplicador(String profissionalAplicador) {
-        this.profissionalAplicador = profissionalAplicador;
+    public void setProfissional_Aplicador(String profissional_aplicador) {
+        this.profissional_aplicador = profissional_aplicador;
     }
 }

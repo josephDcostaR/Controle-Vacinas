@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.api.model.Imunizacao;
 
@@ -15,18 +17,18 @@ public class DAOImunizacao {
         public static int adicionarImunizacao(Imunizacao imunizacao) throws SQLException{
 
             //Query de inserçao do banco
-            String sql = "INSERT INTO imunizacao (idPaciente, idDose, dataAplicacao, fabricante, lote, localAplicacao, profissionalAplicador) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO imunizacoes (id_paciente, id_dose, data_aplicacao, fabricante, lote, local_aplicacao, profissional_aplicador) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             try(PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 
                 //adicionar os respectivos valores no lugar das ? na Query
-                comando.setLong(1, imunizacao.getIdPaciente());
-                comando.setLong(2, imunizacao.getIdDose());
-                comando.setDate(3, new java.sql.Date(imunizacao.getDataAplicacao().getTime()));
+                comando.setInt(1, imunizacao.getid_paciente());
+                comando.setInt(2, imunizacao.getid_dose());
+                comando.setDate(3, new java.sql.Date(imunizacao.getdata_aplicacao().getTime()));
                 comando.setString(4, imunizacao.getFabricante());
                 comando.setString(5, imunizacao.getLote());
-                comando.setString(6, imunizacao.getLocalAplicacao());
-                comando.setString(7, imunizacao.getProfissionalAplicador());
+                comando.setString(6, imunizacao.getlocal_aplicacao());
+                comando.setString(7, imunizacao.getProfissional_Aplicador());
 
                 //enviar o sql para o banco de dados
                 comando.executeUpdate();
@@ -50,19 +52,19 @@ public class DAOImunizacao {
         public static int alterarImunizacao (Imunizacao imunizacao) throws SQLException{
 
             //Query de alteracao do banco
-            String sql = "UPDATE imunizacao SET idPaciente = ?, idDose = ?, dataAplicacao = ?, fabricante = ?, lote = ?, localAplicacao = ?, profissionalAplicador = ? WHERE id = ?";
+            String sql = "UPDATE imunizacoes SET id_paciente = ?, id_dose = ?, data_aplicacao = ?, fabricante = ?, lote = ?, local_aplicacao = ?, profissional_aplicador = ? WHERE id = ?";
 
             try(PreparedStatement comando = conexao.prepareStatement(sql)){
 
                 //adicionar os respectivos valores no lugar das ? na Query
-                comando.setLong(1, imunizacao.getIdPaciente());
-                comando.setLong(2, imunizacao.getIdDose());
-                comando.setDate(3, new java.sql.Date(imunizacao.getDataAplicacao().getTime()));
+                comando.setInt(1, imunizacao.getid_paciente());
+                comando.setInt(2, imunizacao.getid_dose());
+                comando.setDate(3, new java.sql.Date(imunizacao.getdata_aplicacao().getTime()));
                 comando.setString(4, imunizacao.getFabricante());
                 comando.setString(5, imunizacao.getLote());
-                comando.setString(6, imunizacao.getLocalAplicacao());
-                comando.setString(7, imunizacao.getProfissionalAplicador());
-                comando.setLong(8, imunizacao.getId());
+                comando.setString(6, imunizacao.getlocal_aplicacao());
+                comando.setString(7, imunizacao.getProfissional_Aplicador());
+                comando.setInt(8, imunizacao.getId());
 
                 //enviar o sql para o banco de dados
                 int linhasAlteradas = comando.executeUpdate();
@@ -73,7 +75,7 @@ public class DAOImunizacao {
         }
 
 
-        public static int excluirImunizacao(Long id) throws SQLException{
+        public static int excluirImunizacao(int id) throws SQLException{
             //define o sql de exclusao
             String sql = "DELETE FROM imunizacoes WHERE id = ?";
 
@@ -81,7 +83,7 @@ public class DAOImunizacao {
                 PreparedStatement comando = conexao.prepareStatement(sql) //cria a conexao com o sql a ser preparado
             ) {
                 //substitui a ? pelo id do usuario
-                comando.setLong(1, id);
+                comando.setInt(1, id);
 
                 //executa a consulta e armazena o resultado da quantidade de linhas excluidas na variavel 
                 int qtdeLinhasExcluidas = comando.executeUpdate();
@@ -93,15 +95,15 @@ public class DAOImunizacao {
         }
 
         
-        public static int excluirTodos(Long idPaciente) throws SQLException {
+        public static int excluirTodos(int id_paciente) throws SQLException {
             // define o sql de exclusao
-            String sql = "DELETE FROM imunizacoes WHERE idPaciente = ?";
+            String sql = "DELETE FROM imunizacoes WHERE id_paciente = ?";
 
             try (
                 PreparedStatement comando = conexao.prepareStatement(sql) // cria a conexao com o sql a ser preparado
             ) {
                 // substitui a ? pelo id do paciente
-                comando.setLong(1, idPaciente);
+                comando.setInt(1, id_paciente);
 
                 // executa a consulta e armazena o resultado da quantidade de linhas excluidas na variavel 
                 int qtdeLinhasExcluidas = comando.executeUpdate();
@@ -112,7 +114,7 @@ public class DAOImunizacao {
             } 
         }
 
-        public static Imunizacao consultarImunizacaoPorId(Long id) throws SQLException{
+        public static Imunizacao consultarImunizacaoPorId(int id) throws SQLException{
             //define o sql de consulta
             String sql = "SELECT * FROM imunizacoes WHERE id = ?";
 
@@ -120,7 +122,7 @@ public class DAOImunizacao {
                 PreparedStatement comando = conexao.prepareStatement(sql) //cria a conexao com o sql a ser preparado
             ) {
                 //substitui a ? pelo id do usuario
-                comando.setLong(1, id);
+                comando.setInt(1, id);
 
                 //executa a consulta e armazena o resultado da quantidade de linhas excluidas na variavel 
                 ResultSet resultado = comando.executeQuery();
@@ -129,14 +131,14 @@ public class DAOImunizacao {
                 if (resultado.next()) {
                     //cria o objeto pessoa com os dados retornados do banco
                     Imunizacao imunizacao = new Imunizacao(
-                        resultado.getLong("id"),
-                        resultado.getLong("idPaciente"),
-                        resultado.getLong("idDose"),
-                        resultado.getDate("dataAplicacao"),
+                        resultado.getInt("id"),
+                        resultado.getInt("id_paciente"),
+                        resultado.getInt("id_dose"),
+                        resultado.getDate("data_aplicacao"),
                         resultado.getString("fabricante"),
                         resultado.getString("lote"),
-                        resultado.getString("localAplicacao"),
-                        resultado.getString("profissionalAplicador")
+                        resultado.getString("local_aplicacao"),
+                        resultado.getString("profissional_aplicador")
                     );                 
                     return imunizacao;
                 } else {
@@ -145,16 +147,14 @@ public class DAOImunizacao {
             }
         }
 
-        public static Imunizacao consultarTodasImunizacaoPorId(Long id) throws SQLException {
+        public static Imunizacao consultarTodasImunizacao() throws SQLException {
             // define o sql de consulta
-            String sql = "SELECT * FROM imunizacoes WHERE id = ?";
+            String sql = "SELECT * FROM imunizacoes";
         
             try (
                 PreparedStatement comando = conexao.prepareStatement(sql) // cria a conexao com o sql a ser preparado
             ) {
-                // substitui a ? pelo id do usuario
-                comando.setLong(1, id);
-        
+            
                 // executa a consulta e armazena o resultado na variavel 
                 ResultSet resultado = comando.executeQuery();
         
@@ -162,14 +162,14 @@ public class DAOImunizacao {
                 if (resultado.next()) {
                     // cria o objeto imunizacao com os dados retornados do banco
                     Imunizacao imunizacao = new Imunizacao(
-                        resultado.getLong("id"),
-                        resultado.getLong("idPaciente"),
-                        resultado.getLong("idDose"),
-                        resultado.getDate("dataAplicacao"),
+                        resultado.getInt("id"),
+                        resultado.getInt("id_paciente"),
+                        resultado.getInt("id_dose"),
+                        resultado.getDate("data_aplicacao"),
                         resultado.getString("fabricante"),
                         resultado.getString("lote"),
-                        resultado.getString("localAplicacao"),
-                        resultado.getString("profissionalAplicador")
+                        resultado.getString("local_aplicacao"),
+                        resultado.getString("profissional_aplicador")
                     );                 
                     return imunizacao;
                 } else {
@@ -178,15 +178,15 @@ public class DAOImunizacao {
             }
         }
 
-        public static Imunizacao consultarImunizacaoPorPaciente(Long id) throws SQLException{
+        public static Imunizacao consultarImunizacaoPorPaciente(int id_paciente)throws SQLException{
             //define o sql de consulta
-            String sql = "SELECT * FROM imunizacoes WHERE idPaciente = ?";
+            String sql = "SELECT * FROM imunizacoes JOIN paciente ON imunizacoes.id_paciente = paciente.id WHERE paciente.id = ?";
 
             try (
                 PreparedStatement comando = conexao.prepareStatement(sql) //cria a conexao com o sql a ser preparado
             ) {
                 //substitui a ? pelo id do usuario
-                comando.setLong(1, id);
+                comando.setInt(1, id_paciente);
 
                 //executa a consulta e armazena o resultado da quantidade de linhas excluidas na variavel 
                 ResultSet resultado = comando.executeQuery();
@@ -195,14 +195,14 @@ public class DAOImunizacao {
                 if (resultado.next()) {
                     //cria o objeto pessoa com os dados retornados do banco
                     Imunizacao imunizacao = new Imunizacao(
-                        resultado.getLong("id"),
-                        resultado.getLong("idPaciente"),
-                        resultado.getLong("idDose"),
-                        resultado.getDate("dataAplicacao"),
+                        resultado.getInt("id"),
+                        resultado.getInt("id_paciente"),
+                        resultado.getInt("id_dose"),
+                        resultado.getDate("data_aplicacao"),
                         resultado.getString("fabricante"),
                         resultado.getString("lote"),
-                        resultado.getString("localAplicacao"),
-                        resultado.getString("profissionalAplicador")
+                        resultado.getString("local_aplicacao"),
+                        resultado.getString("profissional_aplicador")
                     );                 
                     return imunizacao;
                 } else {
@@ -211,38 +211,34 @@ public class DAOImunizacao {
             }
         }
 
-        public static Imunizacao  consultarImunizacoesPorIntervalo(Long id, Date dataini, Date datafim) throws SQLException{
+        public static List<Imunizacao> consultarImunizacoesPorIntervalo(int id_paciente, Date dataini, Date datafim) throws SQLException{
             //define o sql de consulta
-            String sql = "SELECT * FROM imunizacoes WHERE idPaciente = ? AND dataAplicacao BETWEEN ? AND ?";
+            String sql = "SELECT * FROM imunizacoes WHERE id_paciente = ? AND data_aplicacao BETWEEN ? AND ?";
 
-            try (
-                PreparedStatement comando = conexao.prepareStatement(sql) //cria a conexao com o sql a ser preparado
-            ) {
+            List<Imunizacao> imunizacoes = new ArrayList<>();
+
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
                 //substitui a ? pelo id do usuario
-                comando.setLong(1, id);
+                comando.setInt(1, id_paciente);
                 comando.setDate(2, dataini);
                 comando.setDate(3, datafim);
 
-                //executa a consulta e armazena o resultado da quantidade de linhas excluidas na variavel 
                 ResultSet resultado = comando.executeQuery();
 
-                //retorna o objeto pessoa
-                if (resultado.next()) {
-                    //cria o objeto pessoa com os dados retornados do banco
+                while (resultado.next()) {
                     Imunizacao imunizacao = new Imunizacao(
-                        resultado.getLong("id"),
-                        resultado.getLong("idPaciente"),
-                        resultado.getLong("idDose"),
-                        resultado.getDate("dataAplicacao"),
+                        resultado.getInt("id"),
+                        resultado.getInt("id_paciente"),
+                        resultado.getInt("id_dose"),
+                        resultado.getDate("data_aplicacao"),
                         resultado.getString("fabricante"),
                         resultado.getString("lote"),
-                        resultado.getString("localAplicacao"),
-                        resultado.getString("profissionalAplicador")
-                    );                 
-                    return imunizacao;
-                } else {
-                    return null;
+                        resultado.getString("local_aplicacao"),
+                        resultado.getString("profissional_aplicador")
+                    );
+                    imunizacoes.add(imunizacao);
                 }
+                return imunizacoes;
             }
         }
 }
